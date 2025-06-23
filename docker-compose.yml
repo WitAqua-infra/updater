@@ -1,20 +1,13 @@
 version: "2"
 services:
-  nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-    volumes:
-      - "./nginx/builds:/builds"
-      - "./nginx/builds.json:/builds.json"
   updater:
     build: .
     ports: 
-      - "8080:8080"
+      - "9781:8080"
     volumes:
       - "./device_deps.json:/app/device_deps.json"
       - "./devices.json:/app/devices.json"
       - "./devices_local.json:/app/devices_local.json"
     environment: 
-      - UPSTREAM_URL=http://nginx/builds.json
-      - DOWNLOAD_BASE_URL=https://nginx/builds
+      - UPSTREAM_URL=http://localhost/builds.json
+      - DOWNLOAD_BASE_URL=http://localhost/builds
