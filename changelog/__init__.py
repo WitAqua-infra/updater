@@ -52,7 +52,10 @@ def is_versions_branch(branch, versions=None):
 
 
 def get_project_repo(project):
-    return project.split('/', 1)[1]
+    parts = project.split('/', 1)
+    if len(parts) > 1:
+        return parts[1]
+    return ""
 
 
 def get_device_dependencies(device):
