@@ -3,6 +3,7 @@ from __future__ import print_function
 import hashlib
 import json
 import os
+import re
 import sys
 import zipfile
 
@@ -17,7 +18,7 @@ FILE_BASE = sys.argv[1]
 builds = {}
 
 for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
-    data = open(f)
+    data = open(f, "rb")
     filename = f.split('/')[-1]
     parts = os.path.splitext(filename)[0].split('-')
     if len(parts) < 4:
