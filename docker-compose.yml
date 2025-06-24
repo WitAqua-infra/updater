@@ -3,7 +3,7 @@ services:
   updater:
     build: .
     ports: 
-      - "9781:8080"
+      - "19781:8080"
     volumes:
       - "./device_deps.json:/app/device_deps.json"
       - "./devices.json:/app/devices.json"
