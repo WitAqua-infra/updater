@@ -26,10 +26,10 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
         data.close()
         continue
     # parts: [ROM_NAME, ANDROID_VERSION, DATE, DEVICE, VERSION, OFFICIAL]
-    builddate = parts[-5]
-    device = parts[-4]
-    version = parts[-3]
-    buildtype = parts[-2]
+    builddate = parts[-4]
+    device = parts[-3]
+    version = parts[-2]
+    buildtype = parts[-1]
     # OFFICIAL/UNOFFICIALはparts[-1]だが、typeとして使う
     print('hashing sha256 for {}'.format(filename), file=sys.stderr)
     sha256 = hashlib.sha256()
