@@ -9,8 +9,8 @@ services:
       - "./devices.json:/app/devices.json"
       - "./devices_local.json:/app/devices_local.json"
     environment: 
-      - UPSTREAM_URL=http://localhost/builds.json
-      - DOWNLOAD_BASE_URL=http://localhost/builds
+      - UPSTREAM_URL=http://download.witaqua.org/api/builds.json
+      - DOWNLOAD_BASE_URL=http://download.witaqua.org/api/builds
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     depends_on:
