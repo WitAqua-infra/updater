@@ -91,7 +91,7 @@ def get_type(project):
 
 
 def is_device_specific_repo(project):
-    if '_kernel_' in project or '_device_' in project:
+    if 'kernel_' in project or 'device_' in project:
         return True
     parts = project.split("/", maxsplit=1)
     if len(parts) > 1:
@@ -104,9 +104,6 @@ def is_device_specific_repo(project):
 def is_related_change(device, project):
     if device == 'all':
         return True
-
-    if 'android_' not in project:
-        return False
 
     if is_device_specific_repo(project):
         if get_project_repo(project) in get_device_dependencies(device):
