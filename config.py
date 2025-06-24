@@ -7,8 +7,8 @@ class Config(object):
     WIKI_INFO_URL = os.environ.get('WIKI_INFO_URL', 'https://wiki.lineageos.org/devices/{device}')
     STATUS_URL = os.environ.get('STATUS_URL', '#')
 
-    UPSTREAM_URL = os.environ.get('UPSTREAM_URL', '')
-    DOWNLOAD_BASE_URL = os.environ.get('DOWNLOAD_BASE_URL', 'https://mirrorbits.lineageos.org')
+    UPSTREAM_URL = os.environ.get('UPSTREAM_URL', 'http://download.witaqua.org/api/builds.json')
+    DOWNLOAD_BASE_URL = os.environ.get('DOWNLOAD_BASE_URL', 'http://download.witaqua.org/api/builds')
 
     DEVICES_JSON_PATH = os.environ.get('DEVICES_JSON_PATH', 'devices.json')
     DEVICES_LOCAL_JSON_PATH = os.environ.get('DEVICES_LOCAL_JSON_PATH', 'devices_local.json')

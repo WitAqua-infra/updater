@@ -9,8 +9,6 @@ services:
       - "./devices_local.json:/app/devices_local.json"
       - "./nginx/builds:/app/nginx/builds"
     environment: 
-      - UPSTREAM_URL=http://download.witaqua.org/api/builds.json
-      - DOWNLOAD_BASE_URL=http://download.witaqua.org/api/builds
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     restart: always
