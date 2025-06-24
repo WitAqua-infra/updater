@@ -52,7 +52,10 @@ def is_versions_branch(branch, versions=None):
 
 
 def get_project_repo(project):
-    return project.split('/', 1)[1]
+    parts = project.split('/', 1)
+    if len(parts) > 1:
+        return parts[1]
+    return ""
 
 
 def get_device_dependencies(device):
@@ -90,8 +93,11 @@ def get_type(project):
 def is_device_specific_repo(project):
     if '_kernel_' in project or '_device_' in project:
         return True
-
-    repository = project.split("/", maxsplit=1)[1]
+    parts = project.split("/", maxsplit=1)
+    if len(parts) > 1:
+        repository = parts[1]
+    else:
+        repository = parts[0]
     return repository in get_dependencies_flat()
 
 
