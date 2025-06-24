@@ -2,7 +2,7 @@ import os
 
 
 class Config(object):
-    GERRIT_URL = os.environ.get('GERRIT_URL', 'https://review.lineageos.org')
+    GERRIT_URL = os.environ.get('GERRIT_URL', 'https://gerrit.witaqua.org/')
     WIKI_INSTALL_URL = os.environ.get('WIKI_INSTALL_URL', 'https://wiki.lineageos.org/devices/{device}/install')
     WIKI_INFO_URL = os.environ.get('WIKI_INFO_URL', 'https://wiki.lineageos.org/devices/{device}')
     STATUS_URL = os.environ.get('STATUS_URL', '#')
@@ -12,11 +12,11 @@ class Config(object):
 
     DEVICES_JSON_PATH = os.environ.get('DEVICES_JSON_PATH', 'devices.json')
     DEVICES_LOCAL_JSON_PATH = os.environ.get('DEVICES_LOCAL_JSON_PATH', 'devices_local.json')
-    OFFICIAL_DEVICES_JSON_URL = os.environ.get('OFFICIAL_DEVICES_JSON_URL', 'https://raw.githubusercontent.com/LineageOS/hudson/main/updater/devices.json')
+    OFFICIAL_DEVICES_JSON_URL = os.environ.get('OFFICIAL_DEVICES_JSON_URL', 'https://raw.githubusercontent.com/witaqua/hudson/main/updater/devices.json')
     DEVICE_DEPS_PATH = os.environ.get('DEVICE_DEPS_PATH', 'device_deps.json')
-    OFFICIAL_DEVICE_DEPS_JSON_URL = os.environ.get('OFFICIAL_DEVICE_DEPS_JSON_URL', 'https://raw.githubusercontent.com/LineageOS/hudson/main/updater/device_deps.json')
-    LINEAGE_BUILD_TARGETS_PATH = os.environ.get('LINEAGE_BUILD_TARGETS_PATH', 'lineage-build-targets')
-    OFFICIAL_LINEAGE_BUILD_TARGETS_URL = os.environ.get('OFFICIAL_LINEAGE_BUILD_TARGETS_URL', 'https://raw.githubusercontent.com/LineageOS/hudson/main/lineage-build-targets')
+    OFFICIAL_DEVICE_DEPS_JSON_URL = os.environ.get('OFFICIAL_DEVICE_DEPS_JSON_URL', 'https://raw.githubusercontent.com/witaqua/hudson/main/updater/device_deps.json')
+    LINEAGE_BUILD_TARGETS_PATH = os.environ.get('LINEAGE_BUILD_TARGETS_PATH', 'witaqua-build-targets')
+    OFFICIAL_LINEAGE_BUILD_TARGETS_URL = os.environ.get('OFFICIAL_LINEAGE_BUILD_TARGETS_URL', 'https://raw.githubusercontent.com/witaqua/hudson/main/witaqua-build-targets')
 
 
 class FlaskConfig(object):
