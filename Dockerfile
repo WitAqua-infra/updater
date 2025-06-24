@@ -1,12 +1,4 @@
-FROM golang:1.21-bullseye AS overmind
-RUN GO111MODULE=on go install github.com/DarthSim/overmind/v2@latest
-
-FROM python:3.11-slim-bullseye
-COPY --from=overmind /go/bin/overmind /usr/local/bin/overmind
-
-RUN apt-get update && apt-get install -y \
-    tmux \
-    && rm -rf /var/lib/apt/lists/*
+FROM python:3.11-bullseye
 
 ARG VERSION=dev
 ENV VERSION=$VERSION
@@ -27,4 +19,4 @@ ENV FLASK_APP="app.py"
 
 RUN pip install -r requirements.txt
 
-CMD ["/usr/local/bin/overmind", "start"]
+CMD ["gunicorn", "-b", "[::]:8080", "-w", "8", "app:app"]
