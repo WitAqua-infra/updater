@@ -46,7 +46,7 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
             timestamp = int(os.path.getmtime(f))
     build_entry = {
         'datetime': timestamp,
-        'date': builddate,  # build直下にもdateを追加
+        'date': '{}-{}-{}'.format(builddate[0:4], builddate[4:6], builddate[6:8]) if len(builddate) == 8 and builddate.isdigit() else str(builddate),
         'version': version,
         'type': buildtype.lower(),
         'files': [
