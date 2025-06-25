@@ -25,18 +25,15 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
         print("Invalid filename format:", filename, file=sys.stderr)
         data.close()
         continue
-    # parts: [ROM_NAME, ANDROID_VERSION, DATE, DEVICE, VERSION, OFFICIAL]
     builddate = parts[-4]
     device = parts[-3]
     version = parts[-2]
     buildtype = parts[-1]
-    # OFFICIAL/UNOFFICIALはparts[-1]だが、typeとして使う
     print('hashing sha256 for {}'.format(filename), file=sys.stderr)
     sha256 = hashlib.sha256()
     for buf in iter(lambda : data.read(128 * 1024), b''):
         sha256.update(buf)
     data.close()
-    # 日付取得処理
     timestamp = None
     try:
         with zipfile.ZipFile(f, 'r') as update_zip:
@@ -47,16 +44,21 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
             timestamp = int(mktime(datetime.strptime(builddate, '%Y%m%d').timetuple()))
         except Exception as e2:
             timestamp = int(os.path.getmtime(f))
-    builds.setdefault(device, []).append({
-        'sha256': sha256.hexdigest(),
-        'size': os.path.getsize(f),
-        'date': '{}-{}-{}'.format(builddate[0:4], builddate[4:6], builddate[6:8]) if len(builddate) == 8 and builddate.isdigit() else str(builddate),
+    build_entry = {
         'datetime': timestamp,
-        'filename': filename,
-        'filepath': f.replace(FILE_BASE, ''),
         'version': version,
-        'type': buildtype.lower()
-    })
+        'type': buildtype.lower(),
+        'files': [
+            {
+                'sha256': sha256.hexdigest(),
+                'size': os.path.getsize(f),
+                'date': '{}-{}-{}'.format(builddate[0:4], builddate[4:6], builddate[6:8]) if len(builddate) == 8 and builddate.isdigit() else str(builddate),
+                'filename': filename,
+                'filepath': f.replace(FILE_BASE, ''),
+            }
+        ]
+    }
+    builds.setdefault(device, []).append(build_entry)
 for device in builds.keys():
-    builds[device] = sorted(builds[device], key=lambda x: x['date'])
+    builds[device] = sorted(builds[device], key=lambda x: x['datetime'])
 print(json.dumps(builds, sort_keys=True, indent=4))
