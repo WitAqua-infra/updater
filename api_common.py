@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 import arrow
 import requests
@@ -16,10 +17,15 @@ def get_builds():
     try:
         req = requests.get(Config.UPSTREAM_URL, timeout=60)
         if req.status_code != 200:
+            print(f"[get_builds] Error: status_code={req.status_code} url={Config.UPSTREAM_URL}", file=sys.stderr)
+            print(f"[get_builds] Response: {req.text}", file=sys.stderr)
             raise UpstreamApiException('Unable to contact upstream API')
         return json.loads(req.text)
     except Exception as e:
-        print(e)
+        import traceback
+        print(f"[get_builds] Exception: {e}", file=sys.stderr)
+        print(f"[get_builds] URL: {Config.UPSTREAM_URL}", file=sys.stderr)
+        traceback.print_exc()
         raise UpstreamApiException('Unable to contact upstream API')
 
 
