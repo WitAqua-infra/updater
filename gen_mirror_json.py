@@ -44,16 +44,21 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
             timestamp = int(mktime(datetime.strptime(builddate, '%Y%m%d').timetuple()))
         except Exception as e2:
             timestamp = int(os.path.getmtime(f))
+    if len(builddate) == 8 and builddate.isdigit():
+        formatted_date = '{}-{}-{}'.format(builddate[0:4], builddate[4:6], builddate[6:8])
+    else:
+        formatted_date = "unknown"
+
     build_entry = {
         'datetime': timestamp,
-        'date': '{}-{}-{}'.format(builddate[0:4], builddate[4:6], builddate[6:8]) if len(builddate) == 8 and builddate.isdigit() else str(builddate),
+        'date': formatted_date,
         'version': version,
         'type': buildtype.lower(),
         'files': [
             {
                 'sha256': sha256.hexdigest(),
                 'size': os.path.getsize(f),
-                'date': '{}-{}-{}'.format(builddate[0:4], builddate[4:6], builddate[6:8]) if len(builddate) == 8 and builddate.isdigit() else str(builddate),
+                'date': formatted_date,
                 'filename': filename,
                 'filepath': f.replace(FILE_BASE, ''),
             }
