@@ -46,6 +46,7 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
             timestamp = int(os.path.getmtime(f))
     build_entry = {
         'datetime': timestamp,
+        'date': builddate,  # build直下にもdateを追加
         'version': version,
         'type': buildtype.lower(),
         'files': [
