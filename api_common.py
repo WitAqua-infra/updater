@@ -120,9 +120,8 @@ def get_oems():
 
 
 @extensions.cache.memoize()
-def get_build_types(device, romtype, after, version):
+def get_build_types(device, after, version):
     roms = get_device_builds(device)
-    roms = [x for x in roms if x['type'] == romtype]
     for rom in roms:
         rom['date'] = arrow.get(rom['date']).datetime
     if after:
@@ -137,7 +136,6 @@ def get_build_types(device, romtype, after, version):
         data.append({
             'id': rom['files'][0]['sha256'],
             'url': '%s%s' % (Config.DOWNLOAD_BASE_URL, rom['files'][0]['filepath']),
-            'romtype': rom['type'],
             'datetime': rom['datetime'],
             'version': rom['version'],
             'filename': rom['files'][0]['filename'],

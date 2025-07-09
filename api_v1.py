@@ -12,23 +12,12 @@ api = Blueprint('api_v1', __name__)
 gerrit = GerritServer(Config.GERRIT_URL)
 
 
-@api.route('/<string:device>/<string:romtype>/<string:incrementalversion>')
-def api_v1_index(device, romtype, incrementalversion):
+@api.route('/<string:device>/<string:incrementalversion>')
+def api_v1_index(device, incrementalversion):
     after = request.args.get('after')
     version = request.args.get('version')
 
-    return get_build_types(device, romtype, after, version)
-
-
-@api.route('/types/<string:device>/')
-@extensions.cache.cached()
-def api_v1_get_types(device):
-    data = get_device_builds(device)
-    types = {'nightly'}
-    for build in data:
-        types.add(build['type'])
-    return jsonify({'response': list(types)})
-
+    return get_build_types(device, after, version)
 
 @api.route('/changes/<device>/')
 @api.route('/changes/<device>/<int:before>/')

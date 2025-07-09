@@ -63,7 +63,6 @@ def api_v2_device_builds(device):
 
         build['files'][0]['date'] = build['date']
         build['files'][0]['datetime'] = build['datetime']
-        build['files'][0]['type'] = build['type']
 
     return jsonify(builds)
 

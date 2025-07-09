@@ -28,7 +28,6 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
     builddate = parts[-4]
     device = parts[-3]
     version = parts[-2]
-    buildtype = parts[-1]
     print('hashing sha256 for {}'.format(filename), file=sys.stderr)
     sha256 = hashlib.sha256()
     for buf in iter(lambda : data.read(128 * 1024), b''):
@@ -53,7 +52,6 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
         'datetime': timestamp,
         'date': formatted_date,
         'version': version,
-        'type': buildtype.lower(),
         'files': [
             {
                 'sha256': sha256.hexdigest(),
