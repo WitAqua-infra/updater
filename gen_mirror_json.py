@@ -18,6 +18,9 @@ FILE_BASE = sys.argv[1]
 builds = {}
 
 for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
+    filename = f.split('/')[-1]
+    if not filename.endswith('.zip'):
+        continue
     data = open(f, "rb")
     filename = f.split('/')[-1]
     parts = os.path.splitext(filename)[0].split('-')
