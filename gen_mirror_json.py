@@ -27,7 +27,7 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
         continue
     builddate = parts[-4]
     device = parts[-3]
-    version = parts[-2]
+    version = parts[-2].lstrip('v')
     print('hashing sha256 for {}'.format(filename), file=sys.stderr)
     sha256 = hashlib.sha256()
     for buf in iter(lambda : data.read(128 * 1024), b''):
