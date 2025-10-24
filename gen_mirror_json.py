@@ -51,19 +51,35 @@ for f in [os.path.join(dp, f) for dp, dn, fn in os.walk(FILE_BASE) for f in fn]:
     else:
         formatted_date = "unknown"
 
+    files_list = [{
+        'sha256': sha256.hexdigest(),
+        'size': os.path.getsize(f),
+        'date': formatted_date,
+        'filename': filename,
+        'filepath': '/' + f.replace(FILE_BASE, '').lstrip('/'),
+    }]
+
+    folder = os.path.dirname(f)
+    for img_file in os.listdir(folder):
+        if img_file.endswith('.img'):
+            img_path = os.path.join(folder, img_file)
+            with open(img_path, 'rb') as data:
+                sha256 = hashlib.sha256()
+                for buf in iter(lambda: data.read(128*1024), b''):
+                    sha256.update(buf)
+            files_list.append({
+                'sha256': sha256.hexdigest(),
+                'size': os.path.getsize(img_path),
+                'date': formatted_date,
+                'filename': img_file,
+                'filepath': '/' + img_path.replace(FILE_BASE, '').lstrip('/'),
+            })
+
     build_entry = {
         'datetime': timestamp,
         'date': formatted_date,
         'version': version,
-        'files': [
-            {
-                'sha256': sha256.hexdigest(),
-                'size': os.path.getsize(f),
-                'date': formatted_date,
-                'filename': filename,
-                'filepath': f.replace(FILE_BASE, ''),
-            }
-        ]
+        'files': files_list
     }
     builds.setdefault(device, []).append(build_entry)
 for device in builds.keys():
