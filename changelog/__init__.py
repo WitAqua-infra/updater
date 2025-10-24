@@ -52,8 +52,9 @@ def is_versions_branch(branch, versions=None):
 
 
 def get_project_repo(project):
-    if len(parts) > 0:
-        return parts[0]
+    parts = project.split('/', 1)
+    if len(parts) > 1:
+        return parts[1]
     return ""
 
 
