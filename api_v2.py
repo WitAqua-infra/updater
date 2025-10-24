@@ -55,7 +55,7 @@ def api_v2_device_builds(device):
     builds = get_device_builds(device)
 
     def get_download_url(file):
-        return Config.DOWNLOAD_BASE_URL + file['filepath']
+        return Config.DOWNLOAD_BASE_URL + "/" +file['filepath']
 
     for build in builds:
         for file in build['files']:
