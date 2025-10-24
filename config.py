@@ -8,7 +8,7 @@ class Config(object):
     STATUS_URL = os.environ.get('STATUS_URL', '#')
 
     UPSTREAM_URL = os.environ.get('UPSTREAM_URL', 'http://api.witaqua.org/builds.json')
-    DOWNLOAD_BASE_URL = os.environ.get('DOWNLOAD_BASE_URL', 'http://download.witaqua.org/builds')
+    DOWNLOAD_BASE_URL = os.environ.get('DOWNLOAD_BASE_URL', 'https://download.witaqua.org/builds')
 
     DEVICES_JSON_PATH = os.environ.get('DEVICES_JSON_PATH', 'devices.json')
     DEVICES_LOCAL_JSON_PATH = os.environ.get('DEVICES_LOCAL_JSON_PATH', 'devices_local.json')
