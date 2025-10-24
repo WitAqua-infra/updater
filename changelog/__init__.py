@@ -52,7 +52,7 @@ def is_versions_branch(branch, versions=None):
 
 
 def get_project_repo(project):
-    if len(parts) > :
+    if len(parts) > 0:
         return parts[0]
     return ""
 
