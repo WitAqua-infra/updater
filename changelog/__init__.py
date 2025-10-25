@@ -55,7 +55,7 @@ def get_project_repo(project):
     parts = project.split('/', 1)
     if len(parts) > 1:
         return parts[1]
-    return ""
+    return parts[0]
 
 
 def get_device_dependencies(device):
