@@ -2,7 +2,7 @@ import os
 
 
 class Config(object):
-    GERRIT_URL = os.environ.get('GERRIT_URL', 'https://gerrit.witaqua.org')
+    GERRIT_URL = os.environ.get('GERRIT_URL', 'https://review.witaqua.org')
     WIKI_INSTALL_URL = os.environ.get('WIKI_INSTALL_URL', 'https://wiki.witaqua.org/devices/{device}.html')
     WIKI_INFO_URL = os.environ.get('WIKI_INFO_URL', 'https://wiki.witaqua.org/devices/{device}.html')
     STATUS_URL = os.environ.get('STATUS_URL', '#')
