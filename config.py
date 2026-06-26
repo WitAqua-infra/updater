@@ -7,6 +7,7 @@ class Config(object):
     WIKI_INFO_URL = os.environ.get('WIKI_INFO_URL', 'https://wiki.witaqua.org/devices/{device}.html')
     STATUS_URL = os.environ.get('STATUS_URL', '#')
 
+    UPSTREAM_PATH = os.environ.get('UPSTREAM_PATH', '')
     UPSTREAM_URL = os.environ.get('UPSTREAM_URL', 'http://api.witaqua.org/builds.json')
     DOWNLOAD_BASE_URL = os.environ.get('DOWNLOAD_BASE_URL', 'https://download.witaqua.org/builds')
 
