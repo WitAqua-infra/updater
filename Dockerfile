@@ -1,4 +1,4 @@
-FROM python:3.11-bullseye
+FROM python:3.14-bullseye
 
 ARG VERSION=dev
 ENV VERSION=$VERSION
